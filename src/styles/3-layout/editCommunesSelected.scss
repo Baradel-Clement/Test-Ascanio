@@ -1,0 +1,22 @@
+.communesSelected {
+    display: flex;
+    flex-flow: row;
+    margin-top: 20px;
+}
+
+.communeSelected {
+    display: flex;
+    width: fit-content;
+    height: 56px;
+    background-color: $yellow;
+    justify-content: space-between;
+    padding: 0px 20px;
+    align-items: center;
+    flex-flow: row;
+    margin: 0px 20px;
+    cursor: pointer;
+}
+
+.communeSelected > p {
+    margin-right: 30px;
+}

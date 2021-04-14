@@ -1,0 +1,12 @@
+.communeToComplete {
+    cursor: pointer;
+}
+
+.communeToComplete.not-visible {
+    display: none;
+}
+
+.communeToComplete.visible {
+    display: flex;
+    flex-flow: column;
+}

@@ -5,5 +5,8 @@
 @import "./1-helpers/placeholder";
 
 // 2 - BASICS
-
 @import "./2-basics/typography";
+
+// 3 - LAYOUT
+@import "./3-layout/autocomplete.scss";
+@import "./3-layout/editCommunesSelected.scss";

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MyGeoAreas from '../../containers/MyGeoAreas';
 import CreateGeoArea from '../../containers/CreateGeoArea';
+import '../../styles/index.scss';
 
 const App = ({ myGeoAreasDisplay, createGeoAreaDisplay }) => (
   <div className="app">

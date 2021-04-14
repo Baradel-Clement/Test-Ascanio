@@ -11,7 +11,7 @@ const EditableTitle = ({
     </div>
   );
   const renderDefaultVew = () => (
-    <div onDoubleClick={() => editZoneName()}>
+    <div onClick={() => editZoneName()}>
       {zoneNameValue}
     </div>
   );
