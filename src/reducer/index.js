@@ -1,7 +1,12 @@
-import { SAVE_COMMUNES, SWITCH_DISPLAY, EDIT_ZONE_NAME, UPDATE_ZONE_NAME_VALUE } from '../actions/index';
+import {
+  SAVE_COMMUNES_TO_COMPLETE,
+  SWITCH_DISPLAY,
+  EDIT_ZONE_NAME,
+  UPDATE_ZONE_NAME_VALUE,
+  CHANGE_AUTOCOMPLETE_INPUT_VALUE,
+} from '../actions/index';
 
 const initialState = {
-  communesData: [{}],
   myGeoAreas: {
     count: 0,
     display: true,
@@ -10,7 +15,9 @@ const initialState = {
     display: false,
     zoneNameValue: '[Nom de la zone]',
     nameIsInEditMode: false,
-  }
+    autocompleteInputValue: '',
+    communesToComplete: [],
+  },
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -27,17 +34,20 @@ const reducer = (state = initialState, action = {}) => {
           display: !state.createGeoArea.display,
         },
       };
-    case SAVE_COMMUNES:
+    case SAVE_COMMUNES_TO_COMPLETE:
       return {
         ...state,
-        communesData: action.communes,
+        createGeoArea: {
+          ...state.createGeoArea,
+          communesToComplete: action.communes,
+        },
       };
     case EDIT_ZONE_NAME:
       return {
         ...state,
         createGeoArea: {
           ...state.createGeoArea,
-          nameIsInEditMode: !state.createGeoArea.nameIsInEditMode
+          nameIsInEditMode: !state.createGeoArea.nameIsInEditMode,
         },
       };
     case UPDATE_ZONE_NAME_VALUE:
@@ -46,6 +56,14 @@ const reducer = (state = initialState, action = {}) => {
         createGeoArea: {
           ...state.createGeoArea,
           zoneNameValue: action.value,
+        },
+      };
+    case CHANGE_AUTOCOMPLETE_INPUT_VALUE:
+      return {
+        ...state,
+        createGeoArea: {
+          ...state.createGeoArea,
+          autocompleteInputValue: action.value,
         },
       };
     default:

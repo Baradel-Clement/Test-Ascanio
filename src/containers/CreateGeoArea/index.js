@@ -4,9 +4,9 @@ import CreateGeoArea from '../../components/CreateGeoArea';
 import { switchDisplay } from '../../actions';
 
 const mapDispatchToProps = (dispatch) => ({
-    switchDisplay: () => {
-        dispatch(switchDisplay());
-    },
-})
+  switchDisplay: () => {
+    dispatch(switchDisplay());
+  },
+});
 
 export default connect(null, mapDispatchToProps)(CreateGeoArea);

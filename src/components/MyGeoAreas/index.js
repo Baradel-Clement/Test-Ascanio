@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MyGeoAreas = ({ communes, myGeoAreasCount, switchDisplay }) => (
+const MyGeoAreas = ({ myGeoAreasCount, switchDisplay }) => (
   <div className="myGeoAreas">
     {
       myGeoAreasCount === 0 && (
@@ -18,13 +18,8 @@ const MyGeoAreas = ({ communes, myGeoAreasCount, switchDisplay }) => (
 );
 
 MyGeoAreas.propTypes = {
-  communes: PropTypes.array,
   myGeoAreasCount: PropTypes.number.isRequired,
   switchDisplay: PropTypes.func.isRequired,
-};
-
-MyGeoAreas.defaultProps = {
-  communes: PropTypes.array,
 };
 
 export default MyGeoAreas;
