@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const EditableTitle = ({ zoneNameValue, nameIsInEditMode, editZoneName, updateZoneNameValue }) => {
-    const renderEditView = () => {
-        return <div>
+    const renderEditView = () => (
+        <div>
             <input type="text" value={zoneNameValue} onChange={(e) => updateZoneNameValue(e.target.value)} />
             <button onClick={() => editZoneName()}>OK</button>
         </div>
-    }
-    const renderDefaultVew = () => {
-        return <div onDoubleClick={() => editZoneName()}>
+    )
+    const renderDefaultVew = () => (
+        <div onDoubleClick={() => editZoneName()}>
             {zoneNameValue}
         </div>
-    }
+    )
     return (
         <div>
             {
