@@ -1,0 +1,16 @@
+.createGeoArea {
+    @include flex(flex, row, space-between, flex-start);
+    width: 1255px;
+    margin-top: 40px;
+}
+
+.createGeoArea-custom > div, .createGeoArea-custom > div > div > input {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.createGeoArea-custom > div > div > input {
+    width: 225px;
+}

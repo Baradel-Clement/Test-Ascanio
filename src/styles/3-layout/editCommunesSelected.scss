@@ -1,22 +1,29 @@
 .communesSelected {
     display: flex;
-    flex-flow: row;
+    flex-flow: row wrap;
     margin-top: 20px;
+    width: 500px;
 }
 
 .communeSelected {
     display: flex;
     width: fit-content;
-    height: 56px;
+    height: 40px;
     background-color: $yellow;
     justify-content: space-between;
-    padding: 0px 20px;
+    padding: 0px 10px;
     align-items: center;
     flex-flow: row;
-    margin: 0px 20px;
+    margin: 10px 20px;
     cursor: pointer;
 }
 
 .communeSelected > p {
-    margin-right: 30px;
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.communeSelected > img {
+    width: 25px;
+    height: 25px;
 }

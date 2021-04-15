@@ -6,6 +6,7 @@ import {
   hideAutocompleteCrea,
   addCommuneCrea,
   removeCommuneCrea,
+  getPictures,
 } from '../../actions';
 
 const mapStateToProps = (state) => ({
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(removeCommuneCrea(commune));
     dispatch(hideAutocompleteCrea());
     dispatch(hideAutocompleteCrea());
+  },
+  addPictures: (commune) => {
+    dispatch(getPictures(commune));
   },
 });
 

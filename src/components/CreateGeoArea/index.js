@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import EditableTitle from '../../containers/EditableTitle';
 import AutocompleteInput from '../../containers/AutocompleteInput';
+import CommunesPictures from '../../containers/CommunesPictures';
 
 const CreateGeoArea = ({ switchDisplay }) => (
   <div className="createGeoArea">
-    <h1>CreateGeoArea</h1>
-    <button onClick={() => switchDisplay()} type="button" className="button">Quittez la création de zone</button>
-    <EditableTitle />
-    <AutocompleteInput />
+    <div className="createGeoArea-custom">
+      <EditableTitle />
+      <AutocompleteInput />
+      <button onClick={() => switchDisplay()} type="button" className="button">Quittez la création de zone</button>
+    </div>
+    <CommunesPictures />
   </div>
 );
 

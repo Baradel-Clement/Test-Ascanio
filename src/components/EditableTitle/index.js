@@ -16,7 +16,7 @@ const EditableTitle = ({
     </div>
   );
   return (
-    <div>
+    <div className="editableTitle-wrap">
       {
                 nameIsInEditMode ? renderEditView() : renderDefaultVew()
             }

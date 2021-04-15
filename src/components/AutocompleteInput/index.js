@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import Proptypes from 'prop-types';
 import trashIcon from '../../assets/Trash.svg';
@@ -12,14 +13,18 @@ const AutocompleteInput = ({
   disabledInput,
   communesSelected,
   removeCommune,
+  addPictures,
 }) => (
-  <div className="autcompleteInput">
+  <div className="autocompleteInput-wrap">
+    <label htmlFor="autocompleteInputCrea">Ville</label>
     <input
       type="search"
+      name="autocompleteInputCrea"
+      className="autocompleteInputCrea"
       value={autocompleteInputValue}
       onChange={(e) => changeAutocompleteInputValue(e.target.value)}
       disabled={(disabledInput) ? 'disabled' : ''}
-      placeholder={disabledInput ? 'Vous ne pouvez pas entrez plus de 3 communes' : 'Cherchez votre commune'}
+      placeholder={disabledInput ? 'Vous ne pouvez pas entrez plus de 3 communes' : 'Cherchez votre ville'}
     />
     <div className="communesToComplete">
       {
@@ -28,6 +33,7 @@ const AutocompleteInput = ({
                 onClick={(e) => {
                   selectCommune(e.target.textContent);
                   hideAutocomplete();
+                  addPictures(commune.nom);
                 }}
                 key={commune.code}
                 className={displayAutocomplete ? 'communeToComplete visible' : 'communeToComplete not-visible'}
@@ -71,6 +77,7 @@ AutocompleteInput.propTypes = {
   disabledInput: Proptypes.bool.isRequired,
   communesSelected: Proptypes.array,
   removeCommune: Proptypes.func.isRequired,
+  addPictures: Proptypes.func.isRequired,
 };
 
 AutocompleteInput.defaultProps = {

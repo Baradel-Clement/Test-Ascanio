@@ -7,6 +7,8 @@ export const CHANGE_AUTOCOMPLETE_INPUT_VALUE = 'CHANGE_AUTOCOMPLETE_INPUT_VALUE'
 export const HIDE_AUTOCOMPLETE_CREA = 'HIDE_AUTOCOMPLETE_CREA';
 export const ADD_COMMUNE_CREA = 'ADD_COMMUNE_CREA';
 export const REMOVE_COMMUNE_CREA = 'REMOVE_COMMUNE_CREA';
+export const GET_PICTURES = 'GET_PICTURES';
+export const SAVE_PICTURES = 'SAVE_PICTURES';
 
 export const saveCommunesToComplete = (communes) => ({
   type: SAVE_COMMUNES_TO_COMPLETE,
@@ -48,4 +50,14 @@ export const addCommuneCrea = (value) => ({
 export const removeCommuneCrea = (commune) => ({
   type: REMOVE_COMMUNE_CREA,
   commune,
+});
+
+export const getPictures = (commune) => ({
+  type: GET_PICTURES,
+  commune,
+});
+
+export const savePictures = (pictures) => ({
+  type: SAVE_PICTURES,
+  pictures,
 });

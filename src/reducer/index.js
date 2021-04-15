@@ -7,6 +7,7 @@ import {
   HIDE_AUTOCOMPLETE_CREA,
   ADD_COMMUNE_CREA,
   REMOVE_COMMUNE_CREA,
+  SAVE_PICTURES,
 } from '../actions/index';
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
     displayAutocomplete: true,
     communesSelected: [],
     disabledInput: false,
+    pictures: [],
   },
 };
 
@@ -102,11 +104,58 @@ const reducer = (state = initialState, action = {}) => {
       const newCommunes = state.createGeoArea.communesSelected;
       const indexToRemove = newCommunes.findIndex((element) => element === action.commune);
       newCommunes.splice(indexToRemove, 1);
+
+      const oldPictures = state.createGeoArea.pictures;
+      const picturesToRemove = [];
+      oldPictures.forEach((element) => {
+        if (element.commune === action.commune) {
+          picturesToRemove.push(element);
+        }
+      });
+      const picIndexsToRemove = [];
+      oldPictures.forEach((oldPic) => {
+        picturesToRemove.forEach((picToRemove) => {
+          if (oldPic === picToRemove) {
+            picIndexsToRemove.push(oldPictures.indexOf(picToRemove));
+          }
+        });
+      });
+      picIndexsToRemove.reverse();
+      picIndexsToRemove.forEach((index) => {
+        oldPictures.splice(index, 1);
+      });
+      const newPictures = [];
+      oldPictures.forEach((pic) => {
+        newPictures.push(pic);
+      });
       return {
         ...state,
         createGeoArea: {
           ...state.createGeoArea,
           communesSelected: newCommunes,
+          disabledInput: false,
+          pictures: newPictures,
+        },
+      };
+    }
+    case SAVE_PICTURES: {
+      const oldPictures = state.createGeoArea.pictures;
+      const newPictures = action.pictures;
+      const pictures = [];
+      if (oldPictures !== undefined) {
+        oldPictures.forEach((pic) => {
+          pictures.push(pic);
+        });
+      }
+      newPictures.forEach((pic) => {
+        pictures.push(pic);
+      });
+
+      return {
+        ...state,
+        createGeoArea: {
+          ...state.createGeoArea,
+          pictures,
         },
       };
     }
@@ -116,3 +165,30 @@ const reducer = (state = initialState, action = {}) => {
 };
 
 export default reducer;
+
+/* pictures: [
+  {
+    src: 'https://picsum.photos/id/695/150',
+    commune: 'Ézy-sur-Eure',
+  },
+  {
+    src: 'https://picsum.photos/id/695/151',
+    commune: 'Ézy-sur-Eure',
+  },
+  {
+    src: 'https://picsum.photos/id/695/152',
+    commune: 'Ézy-sur-Eure',
+  },
+  {
+    src: 'https://picsum.photos/id/695/153',
+    commune: 'Ézy-sur-Eure',
+  },
+  {
+    src: 'https://picsum.photos/id/695/154',
+    commune: 'Ézy-sur-Eure',
+  },
+  {
+    src: 'https://picsum.photos/id/695/154',
+    commune: 'Ézy-sur-Eure',
+  },
+], */

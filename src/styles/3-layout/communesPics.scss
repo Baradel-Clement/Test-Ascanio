@@ -1,0 +1,5 @@
+.communesPictures {
+    width: 705px;
+    height: 394px;
+    @include flex(flex, row wrap, space-between, flex-start);
+}

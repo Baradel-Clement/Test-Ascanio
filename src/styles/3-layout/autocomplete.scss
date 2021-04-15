@@ -1,3 +1,26 @@
+.autocompleteInput-wrap {
+    display: flex;
+    flex-flow: column;
+}
+
+.autocompleteInput-wrap > label {
+    font-size: 14px;
+}
+
+.autocompleteInputCrea {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    width: 300px;
+    height: 50px;
+    font-size: 23px;
+    padding-left: 10px;
+}
+
+.autocompleteInputCrea:focus {
+    border: 2px solid $blue;
+}
+
 .communeToComplete {
     cursor: pointer;
 }
