@@ -23,7 +23,7 @@ export default (store) => (next) => (action) => {
     /*     https://picsum.photos/v2/list?page=RANDOM&limit=5 */
     case GET_PICTURES: {
       const { commune } = action;
-      const randomNum = Math.round(Math.random() * (200 - 0) + 1);
+      const randomNum = Math.round(Math.random() * (199 - 0) + 1);
       axios.get(
         `https://picsum.photos/v2/list?page=${randomNum}&limit=5`,
       ).then((res) => {
@@ -38,6 +38,9 @@ export default (store) => (next) => (action) => {
           newPicturesArray.push({
             src: newPicUrl,
             commune,
+            id: pic.id,
+            width: 1,
+            height: 1,
           });
         });
         store.dispatch(savePictures(newPicturesArray));

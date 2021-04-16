@@ -5,7 +5,6 @@ import {
   getCommunesToAutocomplete,
   hideAutocompleteCrea,
   addCommuneCrea,
-  removeCommuneCrea,
   getPictures,
 } from '../../actions';
 
@@ -14,7 +13,6 @@ const mapStateToProps = (state) => ({
   communesToComplete: state.createGeoArea.communesToComplete,
   displayAutocomplete: state.createGeoArea.displayAutocomplete,
   disabledInput: state.createGeoArea.disabledInput,
-  communesSelected: state.createGeoArea.communesSelected,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,11 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   selectCommune: (value) => {
     dispatch(addCommuneCrea(value));
-  },
-  removeCommune: (commune) => {
-    dispatch(removeCommuneCrea(commune));
-    dispatch(hideAutocompleteCrea());
-    dispatch(hideAutocompleteCrea());
   },
   addPictures: (commune) => {
     dispatch(getPictures(commune));

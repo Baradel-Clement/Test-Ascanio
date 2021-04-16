@@ -9,6 +9,8 @@ export const ADD_COMMUNE_CREA = 'ADD_COMMUNE_CREA';
 export const REMOVE_COMMUNE_CREA = 'REMOVE_COMMUNE_CREA';
 export const GET_PICTURES = 'GET_PICTURES';
 export const SAVE_PICTURES = 'SAVE_PICTURES';
+export const NEW_ORDER_GALLERY = 'NEW_ORDER_GALLERY';
+export const SAVE_GEO_AREA = 'SAVE_GEO_AREA';
 
 export const saveCommunesToComplete = (communes) => ({
   type: SAVE_COMMUNES_TO_COMPLETE,
@@ -60,4 +62,13 @@ export const getPictures = (commune) => ({
 export const savePictures = (pictures) => ({
   type: SAVE_PICTURES,
   pictures,
+});
+
+export const newOrderGallery = (gallery) => ({
+  type: NEW_ORDER_GALLERY,
+  gallery,
+});
+
+export const saveGeoArea = () => ({
+  type: SAVE_GEO_AREA,
 });

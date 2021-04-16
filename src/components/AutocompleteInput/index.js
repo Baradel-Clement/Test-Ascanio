@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import Proptypes from 'prop-types';
-import trashIcon from '../../assets/Trash.svg';
 
 const AutocompleteInput = ({
   autocompleteInputValue,
@@ -11,8 +10,6 @@ const AutocompleteInput = ({
   displayAutocomplete,
   selectCommune,
   disabledInput,
-  communesSelected,
-  removeCommune,
   addPictures,
 }) => (
   <div className="autocompleteInput-wrap">
@@ -43,22 +40,6 @@ const AutocompleteInput = ({
             ))
         }
     </div>
-    <div className="communesSelected">
-      {
-        communesSelected.map((commune) => (
-          <div
-            onClick={() => {
-              removeCommune(commune);
-            }}
-            className="communeSelected"
-            key={commune}
-          >
-            <p>{commune}</p>
-            <img src={trashIcon} alt="trashIcon" />
-          </div>
-        ))
-        }
-    </div>
   </div>
 );
 
@@ -75,8 +56,6 @@ AutocompleteInput.propTypes = {
   displayAutocomplete: Proptypes.bool.isRequired,
   selectCommune: Proptypes.func.isRequired,
   disabledInput: Proptypes.bool.isRequired,
-  communesSelected: Proptypes.array,
-  removeCommune: Proptypes.func.isRequired,
   addPictures: Proptypes.func.isRequired,
 };
 
@@ -87,7 +66,6 @@ AutocompleteInput.defaultProps = {
       code: Proptypes.string,
     }),
   ),
-  communesSelected: Proptypes.array,
 };
 
 export default AutocompleteInput;

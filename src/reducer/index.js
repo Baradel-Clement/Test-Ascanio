@@ -8,12 +8,15 @@ import {
   ADD_COMMUNE_CREA,
   REMOVE_COMMUNE_CREA,
   SAVE_PICTURES,
+  NEW_ORDER_GALLERY,
+  SAVE_GEO_AREA,
 } from '../actions/index';
 
 const initialState = {
   myGeoAreas: {
     count: 0,
     display: true,
+    geoAreas: [],
   },
   createGeoArea: {
     display: false,
@@ -25,6 +28,7 @@ const initialState = {
     communesSelected: [],
     disabledInput: false,
     pictures: [],
+    saveButtonDisabled: true,
   },
 };
 
@@ -85,7 +89,13 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     case ADD_COMMUNE_CREA: {
-      const newCommunesSelected = state.createGeoArea.communesSelected;
+      const oldCommunesSelected = state.createGeoArea.communesSelected;
+      const newCommunesSelected = [];
+      if (oldCommunesSelected.length !== 0) {
+        oldCommunesSelected.forEach((element) => {
+          newCommunesSelected.push(element);
+        });
+      }
       let disabledInput = false;
       newCommunesSelected.push(action.value);
       if (newCommunesSelected.length === 3) {
@@ -97,11 +107,18 @@ const reducer = (state = initialState, action = {}) => {
           ...state.createGeoArea,
           communesSelected: newCommunesSelected,
           disabledInput,
+          saveButtonDisabled: false,
         },
       };
     }
     case REMOVE_COMMUNE_CREA: {
-      const newCommunes = state.createGeoArea.communesSelected;
+      const oldCommunes = state.createGeoArea.communesSelected;
+      const newCommunes = [];
+      if (oldCommunes.length !== 0) {
+        oldCommunes.forEach((element) => {
+          newCommunes.push(element);
+        });
+      }
       const indexToRemove = newCommunes.findIndex((element) => element === action.commune);
       newCommunes.splice(indexToRemove, 1);
 
@@ -128,6 +145,10 @@ const reducer = (state = initialState, action = {}) => {
       oldPictures.forEach((pic) => {
         newPictures.push(pic);
       });
+      let isSaveButtonDisabled = false;
+      if (newPictures.length === 0) {
+        isSaveButtonDisabled = true;
+      }
       return {
         ...state,
         createGeoArea: {
@@ -135,6 +156,7 @@ const reducer = (state = initialState, action = {}) => {
           communesSelected: newCommunes,
           disabledInput: false,
           pictures: newPictures,
+          saveButtonDisabled: isSaveButtonDisabled,
         },
       };
     }
@@ -159,36 +181,56 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     }
+    case NEW_ORDER_GALLERY:
+      return {
+        ...state,
+        createGeoArea: {
+          ...state.createGeoArea,
+          pictures: action.gallery,
+        },
+      };
+    case SAVE_GEO_AREA: {
+      const myOldGeoAreas = state.myGeoAreas.geoAreas;
+      const myNewGeoAreas = [];
+
+      if (myOldGeoAreas.length !== 0) {
+        myOldGeoAreas.forEach((element) => {
+          myNewGeoAreas.push(element);
+        });
+      }
+      const addNewGeoArea = {
+        zoneNameValue: state.createGeoArea.zoneNameValue,
+        communesSelected: state.createGeoArea.communesSelected,
+        pictures: state.createGeoArea.pictures,
+      };
+      myNewGeoAreas.push(addNewGeoArea);
+
+      return {
+        ...state,
+        myGeoAreas: {
+          ...state.myGeoAreas,
+          count: state.myGeoAreas.count + 1,
+          display: true,
+          geoAreas: myNewGeoAreas,
+        },
+        createGeoArea: {
+          ...state.createGeoArea,
+          display: false,
+          zoneNameValue: '[Nom de la zone]',
+          nameIsInEditMode: false,
+          autocompleteInputValue: '',
+          communesToComplete: [],
+          displayAutocomplete: true,
+          communesSelected: [],
+          disabledInput: false,
+          pictures: [],
+          saveButtonDisabled: true,
+        },
+      };
+    }
     default:
       return { ...state };
   }
 };
 
 export default reducer;
-
-/* pictures: [
-  {
-    src: 'https://picsum.photos/id/695/150',
-    commune: 'Ézy-sur-Eure',
-  },
-  {
-    src: 'https://picsum.photos/id/695/151',
-    commune: 'Ézy-sur-Eure',
-  },
-  {
-    src: 'https://picsum.photos/id/695/152',
-    commune: 'Ézy-sur-Eure',
-  },
-  {
-    src: 'https://picsum.photos/id/695/153',
-    commune: 'Ézy-sur-Eure',
-  },
-  {
-    src: 'https://picsum.photos/id/695/154',
-    commune: 'Ézy-sur-Eure',
-  },
-  {
-    src: 'https://picsum.photos/id/695/154',
-    commune: 'Ézy-sur-Eure',
-  },
-], */

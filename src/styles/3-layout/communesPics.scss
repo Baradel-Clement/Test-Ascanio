@@ -1,5 +1,53 @@
 .communesPictures {
     width: 705px;
-    height: 394px;
-    @include flex(flex, row wrap, space-between, flex-start);
+    display: flex;
+    align-items: flex-end;
+    position: relative;
 }
+
+.communesPictures > div > div > img {
+    width: 120px;
+    height: 120px;
+    margin: 10px !important;
+    cursor: grab;
+}
+
+  .saveButton-wrap {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -100px;
+    right: 0px;
+  }
+  
+  .saveButton {
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #FFF;
+    background-color: #000;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .saveButton:hover {
+    background-color: $blue;
+    box-shadow: 0px 8px 15px $blue;
+    color: #FFF;
+  }
+  .saveButton.disabled:hover {
+    background-color: #000;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #FFF;
+    cursor: not-allowed;
+  }
