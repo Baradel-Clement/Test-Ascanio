@@ -2,17 +2,31 @@ import { connect } from 'react-redux';
 import EditableTitle from '../../components/EditableTitle';
 import { editZoneName, updateZoneNameValue } from '../../actions';
 
-const mapStateToProps = (state) => ({
-  zoneNameValue: state.createGeoArea.zoneNameValue,
-  nameIsInEditMode: state.createGeoArea.nameIsInEditMode,
-});
+const mapStateToProps = (state, ownProps) => {
+  switch (ownProps.context) {
+    case 'CreateGeoArea':
+      return {
+        zoneNameValue: state.createGeoArea.zoneNameValue,
+        nameIsInEditMode: state.createGeoArea.nameIsInEditMode,
+      };
+    case 'GeoArea': {
+      return {
+        zoneNameValue: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].zoneNameValue,
+        nameIsInEditMode: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].nameIsInEditMode,
+      };
+    }
 
-const mapDispatchToProps = (dispatch) => ({
+    default:
+      return null;
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
   editZoneName: () => {
-    dispatch(editZoneName());
+    dispatch(editZoneName(ownProps.context, ownProps.indexOfMyGeoArea));
   },
   updateZoneNameValue: (value) => {
-    dispatch(updateZoneNameValue(value));
+    dispatch(updateZoneNameValue(value, ownProps.context, ownProps.indexOfMyGeoArea));
   },
 });
 

@@ -8,7 +8,7 @@ import CommunesPictures from '../../containers/CommunesPictures';
 const CreateGeoArea = ({ switchDisplay }) => (
   <div className="createGeoArea">
     <div className="createGeoArea-custom">
-      <EditableTitle />
+      <EditableTitle context="CreateGeoArea" />
       <AutocompleteInput />
       <CommunesSelected />
       <button onClick={() => switchDisplay()} type="button" className="button">Quittez la création de zone</button>

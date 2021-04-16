@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   SAVE_COMMUNES_TO_COMPLETE,
   SWITCH_DISPLAY,
@@ -10,6 +11,7 @@ import {
   SAVE_PICTURES,
   NEW_ORDER_GALLERY,
   SAVE_GEO_AREA,
+  DELETE_GEO_AREA,
 } from '../actions/index';
 
 const initialState = {
@@ -54,22 +56,44 @@ const reducer = (state = initialState, action = {}) => {
           communesToComplete: action.communes,
         },
       };
-    case EDIT_ZONE_NAME:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          nameIsInEditMode: !state.createGeoArea.nameIsInEditMode,
-        },
-      };
-    case UPDATE_ZONE_NAME_VALUE:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          zoneNameValue: action.value,
-        },
-      };
+    case EDIT_ZONE_NAME: {
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              nameIsInEditMode: !state.createGeoArea.nameIsInEditMode,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].nameIsInEditMode = !state.myGeoAreas.geoAreas[action.indexOfMyGeoArea].nameIsInEditMode;
+          return newState;
+        }
+        default:
+          return null;
+      }
+    }
+    case UPDATE_ZONE_NAME_VALUE: {
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              zoneNameValue: action.value,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].zoneNameValue = action.value;
+          return newState;
+        }
+        default:
+          return null;
+      }
+    }
     case CHANGE_AUTOCOMPLETE_INPUT_VALUE:
       return {
         ...state,
@@ -200,6 +224,7 @@ const reducer = (state = initialState, action = {}) => {
       }
       const addNewGeoArea = {
         zoneNameValue: state.createGeoArea.zoneNameValue,
+        nameIsInEditMode: false,
         communesSelected: state.createGeoArea.communesSelected,
         pictures: state.createGeoArea.pictures,
       };
@@ -225,6 +250,21 @@ const reducer = (state = initialState, action = {}) => {
           disabledInput: false,
           pictures: [],
           saveButtonDisabled: true,
+        },
+      };
+    }
+    case DELETE_GEO_AREA: {
+      const oldGeoAreas = state.myGeoAreas.geoAreas;
+      const newGeoAreas = [];
+      oldGeoAreas.forEach((element) => {
+        newGeoAreas.push(element);
+      });
+      newGeoAreas.splice(action.indexOfMyGeoArea, 1);
+      return {
+        ...state,
+        myGeoAreas: {
+          ...state.myGeoAreas,
+          geoAreas: newGeoAreas,
         },
       };
     }

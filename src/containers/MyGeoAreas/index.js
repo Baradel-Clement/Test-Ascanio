@@ -5,6 +5,7 @@ import { switchDisplay } from '../../actions';
 
 const mapStateToProps = (state) => ({
   myGeoAreasCount: state.myGeoAreas.count,
+  geoAreas: state.myGeoAreas.geoAreas,
 });
 
 const mapDispatchToProps = (dispatch) => ({

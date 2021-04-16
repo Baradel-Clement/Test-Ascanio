@@ -17,6 +17,7 @@ const AutocompleteInput = ({
     <input
       type="search"
       name="autocompleteInputCrea"
+      autoComplete="off"
       className="autocompleteInputCrea"
       value={autocompleteInputValue}
       onChange={(e) => changeAutocompleteInputValue(e.target.value)}

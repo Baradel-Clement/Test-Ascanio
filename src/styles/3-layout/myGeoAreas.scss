@@ -1,0 +1,30 @@
+.myGeoAreas {
+  width: 794px;
+  @include flex(flex, column, flex-start, center);
+}
+
+.geoArea {
+  background-color: #E0E0E0;
+  width: 794px;
+  @include flex(flex, column, flex-start, center);
+  margin-bottom: 30px;
+}
+
+.geoArea_header {
+  width: 705px;
+  height: 50px;
+  @include flex(flex, row, space-between, center);
+  margin-bottom: 20px;
+}
+
+.geoArea_header_options {
+  width: 125px;
+  height: 50px;
+  @include flex(flex, row, space-between, center);
+}
+
+.geoArea_header_options > img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}

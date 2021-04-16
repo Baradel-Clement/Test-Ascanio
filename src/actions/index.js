@@ -11,6 +11,7 @@ export const GET_PICTURES = 'GET_PICTURES';
 export const SAVE_PICTURES = 'SAVE_PICTURES';
 export const NEW_ORDER_GALLERY = 'NEW_ORDER_GALLERY';
 export const SAVE_GEO_AREA = 'SAVE_GEO_AREA';
+export const DELETE_GEO_AREA = 'DELETE_GEO_AREA';
 
 export const saveCommunesToComplete = (communes) => ({
   type: SAVE_COMMUNES_TO_COMPLETE,
@@ -21,13 +22,17 @@ export const switchDisplay = () => ({
   type: SWITCH_DISPLAY,
 });
 
-export const editZoneName = () => ({
+export const editZoneName = (context, indexOfMyGeoArea) => ({
   type: EDIT_ZONE_NAME,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const updateZoneNameValue = (value) => ({
+export const updateZoneNameValue = (value, context, indexOfMyGeoArea) => ({
   type: UPDATE_ZONE_NAME_VALUE,
   value,
+  context,
+  indexOfMyGeoArea,
 });
 
 export const changeAutocompleteInputValue = (value) => ({
@@ -71,4 +76,9 @@ export const newOrderGallery = (gallery) => ({
 
 export const saveGeoArea = () => ({
   type: SAVE_GEO_AREA,
+});
+
+export const deleteGeoArea = (indexOfMyGeoArea) => ({
+  type: DELETE_GEO_AREA,
+  indexOfMyGeoArea,
 });
