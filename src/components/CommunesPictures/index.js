@@ -11,7 +11,7 @@ const SortableGallery = SortableContainer(({ items }) => (
 ));
 
 const CommunesPictures = ({
-  items, setItems, saveButtonDisabled, saveGeoArea,
+  items, setItems,
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));
@@ -20,17 +20,6 @@ const CommunesPictures = ({
   return (
     <div className="communesPictures">
       <SortableGallery items={items} onSortEnd={onSortEnd} axis="xy" />
-      <div className="saveButton-wrap">
-        <button
-          onClick={() => {
-            saveGeoArea();
-          }}
-          disabled={(saveButtonDisabled) ? 'disabled' : ''}
-          type="button"
-          className={saveButtonDisabled ? 'saveButton disabled' : 'saveButton'}
-        >Sauvegardez la zone
-        </button>
-      </div>
     </div>
   );
 };
@@ -38,8 +27,6 @@ const CommunesPictures = ({
 CommunesPictures.propTypes = {
   items: PropTypes.array,
   setItems: PropTypes.func.isRequired,
-  saveGeoArea: PropTypes.func.isRequired,
-  saveButtonDisabled: PropTypes.bool.isRequired,
 };
 
 CommunesPictures.defaultProps = {

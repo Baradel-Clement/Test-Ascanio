@@ -1,3 +1,19 @@
 .editableTitle-wrap {
-    height: 58px;
+  margin-bottom: 30px;
+}
+
+.createGeoArea-custom > div, .createGeoArea-custom > div > div > input {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 28px;
+}
+
+.createGeoArea-custom > div > div > input {
+  width: 300px;
+}
+
+
+.editableTitle-wrap > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

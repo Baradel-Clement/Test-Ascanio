@@ -7,7 +7,7 @@ const EditableTitle = ({
   const renderEditView = () => (
     <div>
       <input type="text" value={zoneNameValue} onChange={(e) => updateZoneNameValue(e.target.value)} />
-      <button type="button" onClick={() => editZoneName()}>OK</button>
+      <button type="button" className="button" onClick={() => editZoneName()}>OK</button>
     </div>
   );
   const renderDefaultVew = () => (

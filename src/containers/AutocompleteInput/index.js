@@ -8,26 +8,42 @@ import {
   getPictures,
 } from '../../actions';
 
-const mapStateToProps = (state) => ({
-  autocompleteInputValue: state.createGeoArea.autocompleteInputValue,
-  communesToComplete: state.createGeoArea.communesToComplete,
-  displayAutocomplete: state.createGeoArea.displayAutocomplete,
-  disabledInput: state.createGeoArea.disabledInput,
-});
+const mapStateToProps = (state, ownProps) => {
+  switch (ownProps.context) {
+    case 'CreateGeoArea':
+      return {
+        autocompleteInputValue: state.createGeoArea.autocompleteInputValue,
+        communesToComplete: state.createGeoArea.communesToComplete,
+        displayAutocomplete: state.createGeoArea.displayAutocomplete,
+        disabledInput: state.createGeoArea.disabledInput,
+      };
+    case 'GeoArea':
+      return {
+        autocompleteInputValue:
+        state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].autocompleteInputValue,
+        communesToComplete: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].communesToComplete,
+        displayAutocomplete:
+        state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].displayAutocomplete,
+        disabledInput: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].disabledInput,
+      };
+    default:
+      return null;
+  }
+};
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   changeAutocompleteInputValue: (value) => {
-    dispatch(changeAutocompleteInputValue(value));
-    dispatch(getCommunesToAutocomplete(value));
+    dispatch(changeAutocompleteInputValue(value, ownProps.context, ownProps.indexOfMyGeoArea));
+    dispatch(getCommunesToAutocomplete(value, ownProps.context, ownProps.indexOfMyGeoArea));
   },
   hideAutocomplete: () => {
-    dispatch(hideAutocompleteCrea());
+    dispatch(hideAutocompleteCrea(ownProps.context, ownProps.indexOfMyGeoArea));
   },
   selectCommune: (value) => {
-    dispatch(addCommuneCrea(value));
+    dispatch(addCommuneCrea(value, ownProps.context, ownProps.indexOfMyGeoArea));
   },
   addPictures: (commune) => {
-    dispatch(getPictures(commune));
+    dispatch(getPictures(commune, ownProps.context, ownProps.indexOfMyGeoArea));
   },
 });
 

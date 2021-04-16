@@ -5,15 +5,26 @@ import {
   hideAutocompleteCrea,
 } from '../../actions';
 
-const mapStateToProps = (state) => ({
-  communesSelected: state.createGeoArea.communesSelected,
-});
+const mapStateToProps = (state, ownProps) => {
+  switch (ownProps.context) {
+    case 'CreateGeoArea':
+      return {
+        communesSelected: state.createGeoArea.communesSelected,
+      };
+    case 'GeoArea':
+      return {
+        communesSelected: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].communesSelected,
+      };
+    default:
+      return null;
+  }
+};
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   removeCommune: (commune) => {
-    dispatch(removeCommuneCrea(commune));
-    dispatch(hideAutocompleteCrea());
-    dispatch(hideAutocompleteCrea());
+    dispatch(removeCommuneCrea(commune, ownProps.context, ownProps.indexOfMyGeoArea));
+    dispatch(hideAutocompleteCrea(ownProps.context, ownProps.indexOfMyGeoArea));
+    dispatch(hideAutocompleteCrea(ownProps.context, ownProps.indexOfMyGeoArea));
   },
 });
 

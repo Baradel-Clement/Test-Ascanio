@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-mixed-operators */
-/* eslint-disable no-console */
 import axios from 'axios';
 
 import {
@@ -10,17 +10,19 @@ import {
 export default (store) => (next) => (action) => {
   switch (action.type) {
     case GET_COMMUNES_TO_AUTOCOMPLETE: {
-      const inputValue = store.getState().createGeoArea.autocompleteInputValue;
+      let inputValue = store.getState().createGeoArea.autocompleteInputValue;
+      if (action.context === 'GeoArea') {
+        inputValue = store.getState().myGeoAreas.geoAreas[action.indexOfMyGeoArea].autocompleteInputValue;
+      }
       axios.get(
         `https://geo.api.gouv.fr/communes?nom=${inputValue}&fields=departement&boost=population&limit=5`,
       ).then((res) => {
         const communesToComplete = res.data;
-        store.dispatch(saveCommunesToComplete(communesToComplete));
+        store.dispatch(saveCommunesToComplete(communesToComplete, action.context, action.indexOfMyGeoArea));
       });
       next(action);
       break;
     }
-    /*     https://picsum.photos/v2/list?page=RANDOM&limit=5 */
     case GET_PICTURES: {
       const { commune } = action;
       const randomNum = Math.round(Math.random() * (199 - 0) + 1);
@@ -43,7 +45,7 @@ export default (store) => (next) => (action) => {
             height: 1,
           });
         });
-        store.dispatch(savePictures(newPicturesArray));
+        store.dispatch(savePictures(newPicturesArray, action.context, action.indexOfMyGeoArea));
       });
       next(action);
       break;

@@ -49,13 +49,24 @@ const reducer = (state = initialState, action = {}) => {
         },
       };
     case SAVE_COMMUNES_TO_COMPLETE:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          communesToComplete: action.communes,
-        },
-      };
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              communesToComplete: action.communes,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].communesToComplete = action.communes;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
+
     case EDIT_ZONE_NAME: {
       switch (action.context) {
         case 'CreateGeoArea':
@@ -95,25 +106,51 @@ const reducer = (state = initialState, action = {}) => {
       }
     }
     case CHANGE_AUTOCOMPLETE_INPUT_VALUE:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          displayAutocomplete: true,
-          autocompleteInputValue: action.value,
-        },
-      };
-    case HIDE_AUTOCOMPLETE_CREA:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          autocompleteInputValue: '',
-          displayAutocomplete: !state.createGeoArea.displayAutocomplete,
-        },
-      };
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              displayAutocomplete: true,
+              autocompleteInputValue: action.value,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].displayAutocomplete = true;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].autocompleteInputValue = action.value;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
+    case HIDE_AUTOCOMPLETE_CREA: {
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              autocompleteInputValue: '',
+              displayAutocomplete: !state.createGeoArea.displayAutocomplete,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].autocompleteInputValue = '';
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].displayAutocomplete = !newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].displayAutocomplete;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
+    }
     case ADD_COMMUNE_CREA: {
-      const oldCommunesSelected = state.createGeoArea.communesSelected;
+      let oldCommunesSelected = state.createGeoArea.communesSelected;
+      if (action.context === 'GeoArea') {
+        oldCommunesSelected = state.myGeoAreas.geoAreas[action.indexOfMyGeoArea].communesSelected;
+      }
       const newCommunesSelected = [];
       if (oldCommunesSelected.length !== 0) {
         oldCommunesSelected.forEach((element) => {
@@ -125,19 +162,35 @@ const reducer = (state = initialState, action = {}) => {
       if (newCommunesSelected.length === 3) {
         disabledInput = true;
       }
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          communesSelected: newCommunesSelected,
-          disabledInput,
-          saveButtonDisabled: false,
-        },
-      };
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              communesSelected: newCommunesSelected,
+              disabledInput,
+              saveButtonDisabled: false,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].communesSelected = newCommunesSelected;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].disabledInput = disabledInput;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].saveButtonDisabled = false;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
     }
     case REMOVE_COMMUNE_CREA: {
-      const oldCommunes = state.createGeoArea.communesSelected;
+      let oldCommunes = state.createGeoArea.communesSelected;
       const newCommunes = [];
+      if (action.context === 'GeoArea') {
+        oldCommunes = state.myGeoAreas.geoAreas[action.indexOfMyGeoArea].communesSelected;
+      }
+
       if (oldCommunes.length !== 0) {
         oldCommunes.forEach((element) => {
           newCommunes.push(element);
@@ -146,7 +199,10 @@ const reducer = (state = initialState, action = {}) => {
       const indexToRemove = newCommunes.findIndex((element) => element === action.commune);
       newCommunes.splice(indexToRemove, 1);
 
-      const oldPictures = state.createGeoArea.pictures;
+      let oldPictures = state.createGeoArea.pictures;
+      if (action.context === 'GeoArea') {
+        oldPictures = state.myGeoAreas.geoAreas[action.indexOfMyGeoArea].pictures;
+      }
       const picturesToRemove = [];
       oldPictures.forEach((element) => {
         if (element.commune === action.commune) {
@@ -173,19 +229,35 @@ const reducer = (state = initialState, action = {}) => {
       if (newPictures.length === 0) {
         isSaveButtonDisabled = true;
       }
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          communesSelected: newCommunes,
-          disabledInput: false,
-          pictures: newPictures,
-          saveButtonDisabled: isSaveButtonDisabled,
-        },
-      };
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              communesSelected: newCommunes,
+              disabledInput: false,
+              pictures: newPictures,
+              saveButtonDisabled: isSaveButtonDisabled,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].communesSelected = newCommunes;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].disabledInput = false;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].pictures = newPictures;
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].saveButtonDisabled = isSaveButtonDisabled;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
     }
     case SAVE_PICTURES: {
-      const oldPictures = state.createGeoArea.pictures;
+      let oldPictures = state.createGeoArea.pictures;
+      if (action.context === 'GeoArea') {
+        oldPictures = state.myGeoAreas.geoAreas[action.indexOfMyGeoArea].pictures;
+      }
       const newPictures = action.pictures;
       const pictures = [];
       if (oldPictures !== undefined) {
@@ -197,22 +269,43 @@ const reducer = (state = initialState, action = {}) => {
         pictures.push(pic);
       });
 
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          pictures,
-        },
-      };
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              pictures,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].pictures = pictures;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
     }
-    case NEW_ORDER_GALLERY:
-      return {
-        ...state,
-        createGeoArea: {
-          ...state.createGeoArea,
-          pictures: action.gallery,
-        },
-      };
+    case NEW_ORDER_GALLERY: {
+      switch (action.context) {
+        case 'CreateGeoArea':
+          return {
+            ...state,
+            createGeoArea: {
+              ...state.createGeoArea,
+              pictures: action.gallery,
+            },
+          };
+        case 'GeoArea': {
+          const newState = { ...state };
+          newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].pictures = action.gallery;
+          return newState;
+        }
+        default:
+          return { ...state };
+      }
+    }
     case SAVE_GEO_AREA: {
       const myOldGeoAreas = state.myGeoAreas.geoAreas;
       const myNewGeoAreas = [];
@@ -225,6 +318,11 @@ const reducer = (state = initialState, action = {}) => {
       const addNewGeoArea = {
         zoneNameValue: state.createGeoArea.zoneNameValue,
         nameIsInEditMode: false,
+        autocompleteInputValue: '',
+        displayAutocomplete: true,
+        disabledInput: state.createGeoArea.disabledInput,
+        saveButtonDisabled: true,
+        communesToComplete: [],
         communesSelected: state.createGeoArea.communesSelected,
         pictures: state.createGeoArea.pictures,
       };

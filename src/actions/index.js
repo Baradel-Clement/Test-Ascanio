@@ -13,9 +13,11 @@ export const NEW_ORDER_GALLERY = 'NEW_ORDER_GALLERY';
 export const SAVE_GEO_AREA = 'SAVE_GEO_AREA';
 export const DELETE_GEO_AREA = 'DELETE_GEO_AREA';
 
-export const saveCommunesToComplete = (communes) => ({
+export const saveCommunesToComplete = (communes, context, indexOfMyGeoArea) => ({
   type: SAVE_COMMUNES_TO_COMPLETE,
   communes,
+  context,
+  indexOfMyGeoArea,
 });
 
 export const switchDisplay = () => ({
@@ -35,43 +37,59 @@ export const updateZoneNameValue = (value, context, indexOfMyGeoArea) => ({
   indexOfMyGeoArea,
 });
 
-export const changeAutocompleteInputValue = (value) => ({
+export const changeAutocompleteInputValue = (value, context, indexOfMyGeoArea) => ({
   type: CHANGE_AUTOCOMPLETE_INPUT_VALUE,
   value,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const getCommunesToAutocomplete = (value) => ({
+export const getCommunesToAutocomplete = (value, context, indexOfMyGeoArea) => ({
   type: GET_COMMUNES_TO_AUTOCOMPLETE,
   value,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const hideAutocompleteCrea = () => ({
+export const hideAutocompleteCrea = (context, indexOfMyGeoArea) => ({
   type: HIDE_AUTOCOMPLETE_CREA,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const addCommuneCrea = (value) => ({
+export const addCommuneCrea = (value, context, indexOfMyGeoArea) => ({
   type: ADD_COMMUNE_CREA,
   value,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const removeCommuneCrea = (commune) => ({
+export const removeCommuneCrea = (commune, context, indexOfMyGeoArea) => ({
   type: REMOVE_COMMUNE_CREA,
   commune,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const getPictures = (commune) => ({
+export const getPictures = (commune, context, indexOfMyGeoArea) => ({
   type: GET_PICTURES,
   commune,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const savePictures = (pictures) => ({
+export const savePictures = (pictures, context, indexOfMyGeoArea) => ({
   type: SAVE_PICTURES,
   pictures,
+  context,
+  indexOfMyGeoArea,
 });
 
-export const newOrderGallery = (gallery) => ({
+export const newOrderGallery = (gallery, context, indexOfMyGeoArea) => ({
   type: NEW_ORDER_GALLERY,
   gallery,
+  context,
+  indexOfMyGeoArea,
 });
 
 export const saveGeoArea = () => ({

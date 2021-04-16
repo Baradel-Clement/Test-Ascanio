@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EditableTitle from '../../containers/EditableTitle';
+import CommunesPictures from '../../containers/CommunesPictures';
+import AutocompleteInput from '../../containers/AutocompleteInput';
+import CommunesSelected from '../../containers/CommunesSelected';
 import trashIcon from '../../assets/Trash.svg';
-import penIcon from '../../assets/Pen.svg';
 
 const GeoArea = ({ zoneNameValue, indexOfMyGeoArea, deleteGeoArea }) => (
   <div className="geoArea">
@@ -14,9 +16,11 @@ const GeoArea = ({ zoneNameValue, indexOfMyGeoArea, deleteGeoArea }) => (
           src={trashIcon}
           alt="trashIcon"
         />
-        <img src={penIcon} alt="penIcon" />
       </div>
     </div>
+    <CommunesPictures indexOfMyGeoArea={indexOfMyGeoArea} context="GeoArea" />
+    <AutocompleteInput indexOfMyGeoArea={indexOfMyGeoArea} context="GeoArea" />
+    <CommunesSelected indexOfMyGeoArea={indexOfMyGeoArea} context="GeoArea" />
   </div>
 );
 
