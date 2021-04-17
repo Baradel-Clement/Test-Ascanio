@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import Proptypes from 'prop-types';
@@ -11,6 +12,7 @@ const AutocompleteInput = ({
   selectCommune,
   disabledInput,
   addPictures,
+  communesSelected,
   context,
   geoAreas,
 }) => {
@@ -21,7 +23,7 @@ const AutocompleteInput = ({
   });
   return (
     <div className="autocompleteInput-wrap">
-      <label htmlFor="autocompleteInputCrea">Ville (maximum 3)</label>
+      <label htmlFor="autocompleteInputCrea">Ville(s) (maximum 3)</label>
       <input
         type="search"
         name="autocompleteInputCrea"
@@ -37,9 +39,20 @@ const AutocompleteInput = ({
             communesToComplete.map((commune) => (
               <div
                 onClick={(e) => {
-                  selectCommune(e.target.textContent);
-                  hideAutocomplete();
-                  addPictures(commune.nom);
+                  let sameCommune = false;
+                  communesSelected.forEach((element) => {
+                    if (element === e.target.textContent) {
+                      sameCommune = true;
+                    }
+                  });
+                  if (sameCommune) {
+                    alert('Vous ne pouvez pas choisir une ville déjà sélectionnée.');
+                  }
+                  else {
+                    selectCommune(e.target.textContent);
+                    hideAutocomplete();
+                    addPictures(commune.nom);
+                  }
                 }}
                 key={commune.code}
                 className={displayAutocomplete ? 'communeToComplete visible' : 'communeToComplete not-visible'}
@@ -69,6 +82,7 @@ AutocompleteInput.propTypes = {
   addPictures: Proptypes.func.isRequired,
   context: Proptypes.string.isRequired,
   geoAreas: Proptypes.array,
+  communesSelected: Proptypes.array,
 };
 
 AutocompleteInput.defaultProps = {
@@ -79,6 +93,7 @@ AutocompleteInput.defaultProps = {
     }),
   ),
   geoAreas: Proptypes.array,
+  communesSelected: Proptypes.array,
 };
 
 export default AutocompleteInput;

@@ -1,6 +1,27 @@
 .createGeoArea {
     @include flex(flex, row, space-between, flex-start);
-    width: 1255px;
     margin-top: 40px;
     position: relative;
+    width: 1300px;
+}
+
+@media screen and (max-width: 1273px) {
+    .createGeoArea {
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 827px) {
+    .createGeoArea {
+        flex-flow: column;
+        width: 279px;
+        align-items: center;
+    }
+
+    .createGeoArea-custom {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin-bottom: 60px;
+    }
 }

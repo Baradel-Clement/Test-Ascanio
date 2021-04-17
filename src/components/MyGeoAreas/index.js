@@ -21,7 +21,7 @@ const MyGeoAreas = ({
     <div className="myGeoAreas-wrap">
       {
       myGeoAreasCount === 0 && (
-        <h1>Vous n'avez pas encore créer de zones géographiques</h1>
+        <h1>Vous n'avez pas encore créé de zones géographiques</h1>
       )
     }
       {
@@ -38,7 +38,7 @@ const MyGeoAreas = ({
         </>
       )
     }
-      <button onClick={() => switchDisplay()} type="button" className="button addZoneBtn">Ajouter une zone</button>
+      <button onClick={() => switchDisplay()} type="button" className="button addZoneBtn">Ajoutez une zone</button>
     </div>
   );
 };

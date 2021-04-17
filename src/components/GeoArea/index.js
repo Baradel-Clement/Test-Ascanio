@@ -26,7 +26,7 @@ const GeoArea = ({
           {
           confirmationDelete && (
             <>
-              <p>Votre zone sera définitivement supprimer :</p>
+              <p>Votre zone sera définitivement supprimée :</p>
               <button onClick={cancelDeleteGeoArea} type="button" id="cancelDelete">Annuler</button>
               <button onClick={deleteGeoArea} type="button" id="confirmDelete">Confirmer</button>
             </>

@@ -10,7 +10,6 @@
 }
 
 .myGeoAreas {
-  width: 794px;
   @include flex(flex, column, flex-start, center);
 }
 
@@ -23,7 +22,6 @@
 
 .geoArea_header {
   width: 705px;
-  height: 50px;
   @include flex(flex, row, space-between, center);
   margin: 20px 6px;
 }
@@ -63,7 +61,6 @@
 }
 
 .geoArea_header_options {
-  width: 200px;
   @include flex(flex, column, center, flex-end);
   text-align: center;
 }
@@ -74,8 +71,77 @@
   cursor: pointer;
 }
 
-
-
 .addZoneBtn {
   margin-bottom: 40px;
+}
+
+@media screen and (max-width: 1277px) {
+  .geoArea {
+    width: 446px;
+  }
+  .geoArea_header {
+    width: 420px;
+  }
+
+  .geoArea_header > .editableTitle-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 308px;
+  }
+
+  .geoArea_header > .editableTitle-wrap > div {
+    width: 100%;
+  }
+
+  .geoArea_header > .editableTitle-wrap > div > input {
+    width: 150px;
+    font-size: 15px;
+  }
+
+  .geoArea_header > .editableTitle-wrap > div > button {
+    width: 96px;
+    height: 34px;
+  }
+  .geoArea_header.geoArea_header_delete {
+    margin-bottom: 40px;
+  }
+  .geoArea_header_options.geoArea_header_options_delete {
+    width: 213px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .myGeoAreas-wrap > h1 {
+    font-size: 29px;
+  }
+}
+
+@media screen and (max-width: 827px) {
+  .myGeoAreas-wrap > h1 {
+    font-size: 23px;
+  }
+
+  .geoArea {
+    width: 300px;
+  }
+
+  .geoArea_header {
+    width: 90%;
+  }
+  .geoArea > .autocompleteInput-wrap {
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+  }
+  .geoArea > .autocompleteInput-wrap > input,
+  .geoArea > .autocompleteInput-wrap > .communesToComplete,
+  .geoArea > .autocompleteInput-wrap > .communesToComplete > .communeToComplete {
+    width: 200px;
+  }
+
+  .geoArea > .autocompleteInput-wrap > .communesToComplete > .communeToComplete {
+    height: 35px;
+    font-size: 18px;
+  }
 }

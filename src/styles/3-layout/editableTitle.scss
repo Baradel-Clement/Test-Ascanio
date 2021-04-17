@@ -31,3 +31,18 @@
 .geoArea_header > div > div > input {
   width: 300px;
 }
+
+@media screen and (max-width: 827px) {
+  .editableTitle-wrap > div {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  .editableTitle-wrap > div > button {
+    margin-top: 30px;
+  }
+
+  .geoArea_header > .editableTitle-wrap > div {
+    font-size: 21px;
+  }
+}
