@@ -1,3 +1,3 @@
-# Lancer le test en local:
+# Pour lancer le test en local:
 * yarn
 * yarn start
