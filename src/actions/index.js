@@ -12,6 +12,9 @@ export const SAVE_PICTURES = 'SAVE_PICTURES';
 export const NEW_ORDER_GALLERY = 'NEW_ORDER_GALLERY';
 export const SAVE_GEO_AREA = 'SAVE_GEO_AREA';
 export const DELETE_GEO_AREA = 'DELETE_GEO_AREA';
+export const ASK_DELETE_CONFIRMATION = 'ASK_DELETE_CONFIRMATION';
+export const CANCEL_DELETE_GEO_AREA = 'CANCEL_DELETE_GEO_AREA';
+export const SAVE_GEO_AREAS_STORAGED = 'SAVE_GEO_AREAS_STORAGED';
 
 export const saveCommunesToComplete = (communes, context, indexOfMyGeoArea) => ({
   type: SAVE_COMMUNES_TO_COMPLETE,
@@ -99,4 +102,19 @@ export const saveGeoArea = () => ({
 export const deleteGeoArea = (indexOfMyGeoArea) => ({
   type: DELETE_GEO_AREA,
   indexOfMyGeoArea,
+});
+
+export const askDeleteConfirmation = (indexOfMyGeoArea) => ({
+  type: ASK_DELETE_CONFIRMATION,
+  indexOfMyGeoArea,
+});
+
+export const cancelDeleteGeoArea = (indexOfMyGeoArea) => ({
+  type: CANCEL_DELETE_GEO_AREA,
+  indexOfMyGeoArea,
+});
+
+export const saveGeoAreasStoraged = (geoAreasStorage) => ({
+  type: SAVE_GEO_AREAS_STORAGED,
+  geoAreasStorage,
 });

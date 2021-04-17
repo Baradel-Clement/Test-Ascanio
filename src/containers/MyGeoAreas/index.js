@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import MyGeoAreas from '../../components/MyGeoAreas';
-import { switchDisplay } from '../../actions';
+import { switchDisplay, saveGeoAreasStoraged } from '../../actions';
 
 const mapStateToProps = (state) => ({
   myGeoAreasCount: state.myGeoAreas.count,
@@ -11,6 +11,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   switchDisplay: () => {
     dispatch(switchDisplay());
+  },
+  saveGeoAreasStoraged: (geoAreasStorage) => {
+    dispatch(saveGeoAreasStoraged(geoAreasStorage));
   },
 });
 

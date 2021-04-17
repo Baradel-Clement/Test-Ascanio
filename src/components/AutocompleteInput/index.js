@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Proptypes from 'prop-types';
 
 const AutocompleteInput = ({
@@ -11,21 +11,29 @@ const AutocompleteInput = ({
   selectCommune,
   disabledInput,
   addPictures,
-}) => (
-  <div className="autocompleteInput-wrap">
-    <label htmlFor="autocompleteInputCrea">Ville</label>
-    <input
-      type="search"
-      name="autocompleteInputCrea"
-      autoComplete="off"
-      className="autocompleteInputCrea"
-      value={autocompleteInputValue}
-      onChange={(e) => changeAutocompleteInputValue(e.target.value)}
-      disabled={(disabledInput) ? 'disabled' : ''}
-      placeholder={disabledInput ? 'Vous ne pouvez pas entrez plus de 3 communes' : 'Cherchez votre ville'}
-    />
-    <div className="communesToComplete">
-      {
+  context,
+  geoAreas,
+}) => {
+  useEffect(() => {
+    if (context === 'GeoArea') {
+      localStorage.setItem('geoAreas', JSON.stringify(geoAreas));
+    }
+  });
+  return (
+    <div className="autocompleteInput-wrap">
+      <label htmlFor="autocompleteInputCrea">Ville (maximum 3)</label>
+      <input
+        type="search"
+        name="autocompleteInputCrea"
+        autoComplete="off"
+        className="autocompleteInputCrea"
+        value={autocompleteInputValue}
+        onChange={(e) => changeAutocompleteInputValue(e.target.value)}
+        disabled={(disabledInput) ? 'disabled' : ''}
+        placeholder="Cherchez votre ville"
+      />
+      <div className="communesToComplete">
+        {
             communesToComplete.map((commune) => (
               <div
                 onClick={(e) => {
@@ -40,9 +48,10 @@ const AutocompleteInput = ({
               </div>
             ))
         }
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 AutocompleteInput.propTypes = {
   autocompleteInputValue: Proptypes.string.isRequired,
@@ -58,6 +67,8 @@ AutocompleteInput.propTypes = {
   selectCommune: Proptypes.func.isRequired,
   disabledInput: Proptypes.bool.isRequired,
   addPictures: Proptypes.func.isRequired,
+  context: Proptypes.string.isRequired,
+  geoAreas: Proptypes.array,
 };
 
 AutocompleteInput.defaultProps = {
@@ -67,6 +78,7 @@ AutocompleteInput.defaultProps = {
       code: Proptypes.string,
     }),
   ),
+  geoAreas: Proptypes.array,
 };
 
 export default AutocompleteInput;

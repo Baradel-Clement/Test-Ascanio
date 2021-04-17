@@ -12,6 +12,9 @@ import {
   NEW_ORDER_GALLERY,
   SAVE_GEO_AREA,
   DELETE_GEO_AREA,
+  ASK_DELETE_CONFIRMATION,
+  CANCEL_DELETE_GEO_AREA,
+  SAVE_GEO_AREAS_STORAGED,
 } from '../actions/index';
 
 const initialState = {
@@ -325,6 +328,7 @@ const reducer = (state = initialState, action = {}) => {
         communesToComplete: [],
         communesSelected: state.createGeoArea.communesSelected,
         pictures: state.createGeoArea.pictures,
+        confirmationDelete: false,
       };
       myNewGeoAreas.push(addNewGeoArea);
 
@@ -363,9 +367,45 @@ const reducer = (state = initialState, action = {}) => {
         myGeoAreas: {
           ...state.myGeoAreas,
           geoAreas: newGeoAreas,
+          count: newGeoAreas.length,
         },
       };
     }
+    case ASK_DELETE_CONFIRMATION: {
+      const newState = { ...state };
+      newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].confirmationDelete = true;
+      return newState;
+    }
+    case CANCEL_DELETE_GEO_AREA: {
+      const newState = { ...state };
+      newState.myGeoAreas.geoAreas[action.indexOfMyGeoArea].confirmationDelete = false;
+      return newState;
+    }
+    case SAVE_GEO_AREAS_STORAGED: {
+      const oldGeoAreas = state.myGeoAreas.geoAreas;
+      const newGeoAreas = [];
+      const geoAreasStoraged = action.geoAreasStorage;
+      oldGeoAreas.forEach((element) => {
+        newGeoAreas.push(element);
+      });
+      geoAreasStoraged.forEach((element) => {
+        newGeoAreas.push(element);
+      });
+      return {
+        ...state,
+        myGeoAreas: {
+          ...state.myGeoAreas,
+          count: newGeoAreas.length,
+          geoAreas: newGeoAreas,
+        },
+      };
+    }
+
+    /*  {
+      const newState = { ...state };
+      newState.myGeoAreas.geoAreas = action.geoAreasStorage;
+      return newState;
+    } */
     default:
       return { ...state };
   }

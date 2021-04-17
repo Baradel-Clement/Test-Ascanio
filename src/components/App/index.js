@@ -11,7 +11,6 @@ const App = ({ myGeoAreasDisplay, createGeoAreaDisplay }) => (
 
   </div>
 );
-
 App.propTypes = {
   myGeoAreasDisplay: PropTypes.bool.isRequired,
   createGeoAreaDisplay: PropTypes.bool.isRequired,

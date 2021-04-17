@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Gallery from 'react-photo-gallery';
 import arrayMove from 'array-move';
@@ -11,8 +11,13 @@ const SortableGallery = SortableContainer(({ items }) => (
 ));
 
 const CommunesPictures = ({
-  items, setItems,
+  items, setItems, context, geoAreas,
 }) => {
+  useEffect(() => {
+    if (context === 'GeoArea') {
+      localStorage.setItem('geoAreas', JSON.stringify(geoAreas));
+    }
+  });
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));
   };
@@ -27,10 +32,13 @@ const CommunesPictures = ({
 CommunesPictures.propTypes = {
   items: PropTypes.array,
   setItems: PropTypes.func.isRequired,
+  context: PropTypes.string.isRequired,
+  geoAreas: PropTypes.array,
 };
 
 CommunesPictures.defaultProps = {
   items: PropTypes.array,
+  geoAreas: PropTypes.array,
 };
 
 export default CommunesPictures;

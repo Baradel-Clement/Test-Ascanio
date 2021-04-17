@@ -8,11 +8,13 @@ const mapStateToProps = (state, ownProps) => {
       return {
         zoneNameValue: state.createGeoArea.zoneNameValue,
         nameIsInEditMode: state.createGeoArea.nameIsInEditMode,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     case 'GeoArea': {
       return {
         zoneNameValue: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].zoneNameValue,
         nameIsInEditMode: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].nameIsInEditMode,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     }
 

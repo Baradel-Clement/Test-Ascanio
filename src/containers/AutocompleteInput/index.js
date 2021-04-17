@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
         communesToComplete: state.createGeoArea.communesToComplete,
         displayAutocomplete: state.createGeoArea.displayAutocomplete,
         disabledInput: state.createGeoArea.disabledInput,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     case 'GeoArea':
       return {
@@ -25,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
         displayAutocomplete:
         state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].displayAutocomplete,
         disabledInput: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].disabledInput,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     default:
       return null;

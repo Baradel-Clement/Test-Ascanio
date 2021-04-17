@@ -10,10 +10,12 @@ const mapStateToProps = (state, ownProps) => {
     case 'CreateGeoArea':
       return {
         communesSelected: state.createGeoArea.communesSelected,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     case 'GeoArea':
       return {
         communesSelected: state.myGeoAreas.geoAreas[ownProps.indexOfMyGeoArea].communesSelected,
+        geoAreas: state.myGeoAreas.geoAreas,
       };
     default:
       return null;
