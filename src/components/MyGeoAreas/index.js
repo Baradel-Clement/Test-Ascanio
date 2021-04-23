@@ -7,6 +7,9 @@ const MyGeoAreas = ({
 }) => {
   const [init, setInit] = useState(true);
   useEffect(() => {
+    if (!(JSON.parse(localStorage.getItem('geoAreas')))) {
+      localStorage.setItem('geoAreas', '[]');
+    }
     if ((JSON.parse(localStorage.getItem('geoAreas')).length !== 0) && (geoAreas.length === 0) && (init === true)) {
       const geoAreasStoraged = JSON.parse(localStorage.getItem('geoAreas'));
       saveGeoAreasStoraged(geoAreasStoraged);
